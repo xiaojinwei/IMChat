@@ -1,0 +1,82 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.google.protobuf'
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //protobuf
+    //************************************************
+//    sourceSets {
+//        main {
+//            proto {
+//                //main目录新建proto目录
+//                srcDir 'src/main/java/com/cj/im/protobuf'
+//                include '**/*.proto'
+//            }
+//            java {
+//                srcDir 'src/main/java'
+//            }
+//        }
+//    }
+    //**************************************************
+}
+
+//protobuf
+//*************************************************************
+//构建task
+/*protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                remove java
+            }
+            task.builtins {
+                java {}
+                // Add cpp output without any option.
+                // DO NOT omit the braces if you want this builtin to be added.
+                cpp {}
+            }
+        }
+    }
+    //生成目录
+    generatedFilesBaseDir = "$projectDir/src/generated"
+}*/
+//*************************************************************
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //protobuf
+    api 'com.google.protobuf:protobuf-java:3.5.0'
+    //implementation 'com.google.protobuf:protoc:3.1.0'
+    //compile 'com.google.protobuf:protobuf-lite:3.0.0'
+    //Netty
+    implementation files('libs/netty-tcp-4.1.33-1.0.jar')
+    //fastjson
+    compileOnly 'com.alibaba:fastjson:1.2.49'
+}
